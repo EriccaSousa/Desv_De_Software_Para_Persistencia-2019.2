@@ -1,30 +1,18 @@
 package model;
 
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-@Entity
 public class Dependente {
-	/*
-	 * nome, o sexo e a data de aniversário, além do grau de parentesco com o
-	 * funcionário.
-	 */
 
-	@Id
-	private String id;
+	private int id;
 	private String nome;
 	private String dataAniver;
 	private String grauParentesco;
-	@ManyToOne
 	private Funcionario funcionario;
 
 	public Dependente() {
 
 	}
 
-	public Dependente(String id, String nome, String dataAniver, String grauParentesco, Funcionario funcionario) {
+	public Dependente(int id, String nome, String dataAniver, String grauParentesco, Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -33,11 +21,11 @@ public class Dependente {
 		this.funcionario = funcionario;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

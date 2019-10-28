@@ -3,35 +3,49 @@ package model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Departamento {
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "departamento_id")
+	private int id;
 	private String nome;
-	@OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "departamento", fetch = FetchType.EAGER)
 	private List<Projeto> projetos;
 
 	public Departamento() {
 
 	}
 
-	public Departamento(String id, String nome, List<Projeto> projetos) {
+	public Departamento(String nome, List<Projeto> projetos) {
+		this(0, nome, projetos);
+
+	}
+
+	public Departamento(int id, String nome, List<Projeto> projetos) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.projetos = projetos;
+
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

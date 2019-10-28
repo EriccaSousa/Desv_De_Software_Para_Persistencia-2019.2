@@ -2,25 +2,14 @@ package model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
-
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Funcionario {
 
-	@Id
-	private String id;
+	private int id;
 	private String nome;
 	private String endereco;
 	private String sexo;
 	private String dataAniversario;
 	private double salario;
-	@OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
 	private List<Dependente> dependentes;
 
 	public Funcionario() {
@@ -28,7 +17,7 @@ public abstract class Funcionario {
 
 	}
 
-	public Funcionario(String id, String nome, String endereco, String sexo, String dataAniversario, double salario,
+	public Funcionario(int id, String nome, String endereco, String sexo, String dataAniversario, double salario,
 			List<Dependente> dependentes) {
 		super();
 		this.id = id;
@@ -41,11 +30,11 @@ public abstract class Funcionario {
 
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

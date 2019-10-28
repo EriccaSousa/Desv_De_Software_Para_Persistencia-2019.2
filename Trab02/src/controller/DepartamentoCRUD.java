@@ -15,19 +15,24 @@ import model.Departamento;
 public class DepartamentoCRUD {
 	static Scanner read = new Scanner(System.in);
 
+	/*
+	 * Criando Departamentos.
+	 */
 	public static void criarDepartamento() {
-		DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();
 
+		System.out.println("Informe os dados para Departamento");
+		System.out.println("Nome: ");
+		String nome = read.nextLine();
+
+		Departamento departamento = new Departamento(nome, null);
+
+		DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();
 		try {
 			departamentoDAO.beginTransaction();
-
-			System.out.println("Informe os dados para Departamento+----------\nNúmero de identificação: ");
-			String id = read.nextLine();
-			System.out.println("Nome: ");
-			String nome = read.nextLine();
-
-			departamentoDAO.save(new Departamento(id, nome, null));
+			departamentoDAO.save(departamento);
 			departamentoDAO.commit();
+
+			System.out.println("\nDepartamento salvo com sucesso!\n");
 		} catch (IllegalStateException | PersistenceException e) {
 			System.out.println("\nErro ao salvar Secretário(a)!\n");
 
@@ -36,8 +41,11 @@ public class DepartamentoCRUD {
 		} finally {
 			departamentoDAO.close();
 		}
-		System.out.println("\nDepartamento salvo com sucesso!\n");
 	}
+
+	/*
+	 * Buscando todos os Departamentos;
+	 */
 
 	public static void findAll() {
 		DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();
@@ -52,26 +60,50 @@ public class DepartamentoCRUD {
 		System.out.println("\n");
 	}
 
-	public static Departamento findByNome() {
-		Departamento departamento = null;
-
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
-		EntityManager em = emf.createEntityManager();
+	/*
+	 * Buscando todos os departamento por nome;
+	 */
+	public static void findByNome() {
+		DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();
 
 		System.out.println("Informe o nome: ");
 		String nome = read.nextLine();
 
-		try {
-			departamento = (Departamento) em.createQuery("SELECT dp FROM Departamento dp WHERE dp.nome LIKE :nome")
-					.setParameter("nome", nome + "%").getSingleResult();
-		} catch (Exception e) {
-			System.out.println("Erro!");
-			e.printStackTrace();
-		}
+		List<Departamento> departamentos = departamentoDAO.findByNome(nome);
 
-		return departamento;
+		departamentoDAO.close();
+
+		System.out.println("\n");
+		for (Departamento departamento : departamentos) {
+			System.out.println(departamento);
+		}
+		System.out.println("\n");
 	}
 
+	/*
+	 * Buscando todos os departamento por id;
+	 */
+	public static void findById1() {
+		DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();
+
+		System.out.println("Informe o número de identificação: ");
+		int id = read.nextInt();
+
+		List<Departamento> departamentos = departamentoDAO.findById(id);
+
+		departamentoDAO.close();
+
+		System.out.println("\n");
+		for (Departamento departamento : departamentos) {
+			System.out.println(departamento);
+		}
+		System.out.println("\n");
+	}
+
+	/*
+	 * Buscando departamento por id, e retornando. Essa função é usada para
+	 * cadastrar Funcionário e Projeto e tambem para remoçoes de Departamento.
+	 */
 	public static Departamento findById() {
 		Departamento departamento = null;
 
@@ -92,27 +124,9 @@ public class DepartamentoCRUD {
 
 		return departamento;
 	}
-
-	public static void deleteByNome() {
-		DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();
-
-		try {
-			departamentoDAO.beginTransaction();
-
-			departamentoDAO.delete(findByNome());
-
-			departamentoDAO.close();
-			System.out.println("Departamento deletado com sucesso!");
-			departamentoDAO.commit();
-		} catch (IllegalStateException | PersistenceException e) {
-			System.out.println("Erro!");
-			departamentoDAO.rollback();
-			e.printStackTrace();
-		} finally {
-			departamentoDAO.close();
-		}
-		System.out.println("\n");
-	}
+	/*
+	 * Deletando Departamentos por id;
+	 */
 
 	public static void deleteById() {
 		DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();

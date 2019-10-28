@@ -1,27 +1,37 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Projeto.findAll", query = "from Projeto") })
 public class Projeto {
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "projeto_id")
+	private int id;
 	private String nome;
 	private String periodo;
 	@ManyToOne
+	@JoinColumn(name = "departamento_id")
 	private Departamento departamento;
 
 	public Projeto() {
 
 	}
 
-	public Projeto(String id, String nome, String periodo, Departamento departamento) {
+	public Projeto(String nome, String periodo, Departamento departamento) {
+		this(0, nome, periodo, departamento);
+	}
+
+	public Projeto(int id, String nome, String periodo, Departamento departamento) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -29,11 +39,11 @@ public class Projeto {
 		this.departamento = departamento;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

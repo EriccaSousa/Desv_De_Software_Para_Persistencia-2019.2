@@ -52,10 +52,10 @@ public class MenusDepartamento {
 				DepartamentoCRUD.findAll();
 				break;
 			case 2:
-				System.out.println("\n" + DepartamentoCRUD.findByNome() + "\n");
+				DepartamentoCRUD.findByNome();
 				break;
 			case 3:
-				System.out.println("\n" + DepartamentoCRUD.findById() + "\n");
+				DepartamentoCRUD.findById1();
 				break;
 			case 4:
 				menuInicialByDepartamento();
@@ -78,7 +78,7 @@ public class MenusDepartamento {
 
 			switch (opcao) {
 			case 1:
-				DepartamentoCRUD.deleteByNome();
+				// DepartamentoCRUD.deleteByNome();
 				break;
 			case 2:
 				DepartamentoCRUD.deleteById();

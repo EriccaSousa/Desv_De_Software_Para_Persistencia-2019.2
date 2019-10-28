@@ -5,8 +5,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-@Entity
-@PrimaryKeyJoinColumn(name = "idFuncionario")
 public class Secretario extends Funcionario {
 
 	private String grauEscolaridade;
@@ -15,7 +13,7 @@ public class Secretario extends Funcionario {
 
 	}
 
-	public Secretario(String id, String nome, String endereco, String sexo, String dataAniversario, double salario,
+	public Secretario(int id, String nome, String endereco, String sexo, String dataAniversario, double salario,
 			List<Dependente> dependentes, String grauEscolaridade) {
 		super(id, nome, endereco, sexo, dataAniversario, salario, dependentes);
 		this.grauEscolaridade = grauEscolaridade;
