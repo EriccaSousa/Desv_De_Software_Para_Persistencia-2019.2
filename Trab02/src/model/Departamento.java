@@ -53,7 +53,7 @@ public class Departamento {
 
 	@Override
 	public String toString() {
-		return "Departamento\nid: " + this.id + "\nNome: " + this.nome + "\nProjetos: " + this.projetos + "\n";
+		return "Departamento\nid: " + this.id + "\nNome: " + this.nome;
 	}
 
 }

@@ -17,13 +17,13 @@ public class MenusIniciais {
 
 			switch (opcao) {
 			case 1:
-
+				MenusDepartamento.menuInicialByDepartamento();
 				break;
 			case 2:
 				menuFuncionarios();
 				break;
 			case 3:
-
+				MenusProjeto.menuInicialByProjeto();
 				break;
 			case 4:
 				// MenusDependentes.menuInicialByDependente();
