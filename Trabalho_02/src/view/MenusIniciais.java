@@ -52,7 +52,7 @@ public class MenusIniciais {
 				MenusPesquisador.menuInicialByPesquisador();
 				break;
 			case 2:
-				// MenusFuncLimpeza.menuInicialByFuncLimpeza();
+				MenusFuncLimpeza.menuInicialByFuncLimpeza();
 				break;
 			case 3:
 				MenuSecretario.menuInicialBySecretario();

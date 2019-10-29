@@ -9,7 +9,7 @@ import model.Funcionario;
 
 public class FuncionarioJPA_DAO extends GenericJPADAO<Funcionario> implements FuncionarioDAO {
 
-	public FuncionarioJPA_DAO(Class<Funcionario> persistenceClass) {
+	public FuncionarioJPA_DAO() {
 		super(Funcionario.class);
 	}
 

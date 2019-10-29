@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 import javax.persistence.PersistenceException;
 
+import dao.FuncionarioJPA_DAO;
+import dao.FuncionarioLimpezaDAO;
+import dao.FuncionarioLimpezaJPA_DAO;
 import dao.PesquisadorDAO;
 import dao.PesquisadorJPA_DAO;
 import dao.SecretarioDAO;
@@ -45,7 +48,8 @@ public class FuncionarioCRUD {
 			System.out.println("Jornada de trabalho: ");
 			String jornadaTrab = read.nextLine();
 
-			FuncionarioLimpeza funcionarioLimpeza = new FuncionarioLimpeza();
+			FuncionarioLimpeza funcionarioLimpeza = new FuncionarioLimpeza(nome, endereco, sexo, dataAniver, salario,
+					cargo, jornadaTrab);
 
 			return funcionarioLimpeza;
 
@@ -100,6 +104,23 @@ public class FuncionarioCRUD {
 			e.printStackTrace();
 		} finally {
 			pesquisadorDAO.close();
+		}
+	}
+
+	public static void criarFuncLmpeza() {
+		FuncionarioLimpezaDAO funcLimpezaDAO = new FuncionarioLimpezaJPA_DAO();
+
+		try {
+			funcLimpezaDAO.beginTransaction();
+			funcLimpezaDAO.save(retornarFuncionario());
+			funcLimpezaDAO.commit();
+		} catch (IllegalStateException | PersistenceException e) {
+			System.out.println("\nErro ao salvar Funcionario de Limpeza!\n");
+
+			funcLimpezaDAO.rollback();
+			e.printStackTrace();
+		} finally {
+			funcLimpezaDAO.close();
 		}
 	}
 
