@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -14,14 +16,14 @@ public class Pesquisador extends Funcionario {
 	}
 
 	public Pesquisador(String nome, String endereco, String sexo, String dataAniversario, double salario,
-			String areaAtuacao) {
-		this(0, nome, endereco, sexo, dataAniversario, salario, areaAtuacao);
+			List<Dependente> dependentes, String areaAtuacao) {
+		this(0, nome, endereco, sexo, dataAniversario, salario, dependentes, areaAtuacao);
 
 	}
 
 	public Pesquisador(int id, String nome, String endereco, String sexo, String dataAniversario, double salario,
-			String areaAtuacao) {
-		super(id, nome, endereco, sexo, dataAniversario, salario);
+			List<Dependente> dependentes, String areaAtuacao) {
+		super(id, nome, endereco, sexo, dataAniversario, salario, dependentes);
 		this.areaAtuacao = areaAtuacao;
 
 	}

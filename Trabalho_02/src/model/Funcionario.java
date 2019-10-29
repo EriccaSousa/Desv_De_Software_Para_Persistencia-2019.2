@@ -1,5 +1,8 @@
 package model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,17 +25,21 @@ public abstract class Funcionario {
 	private String sexo;
 	private String dataAniversario;
 	private double salario;
+	@OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
+	private List<Dependente> dependentes;
 
 	public Funcionario() {
 		super();
 
 	}
 
-	public Funcionario(String nome, String endereco, String sexo, String dataAniversario, double salario) {
-		this(0, nome, endereco, sexo, dataAniversario, salario);
+	public Funcionario(String nome, String endereco, String sexo, String dataAniversario, double salario,
+			List<Dependente> dependentes) {
+		this(0, nome, endereco, sexo, dataAniversario, salario, dependentes);
 	}
 
-	public Funcionario(int id, String nome, String endereco, String sexo, String dataAniversario, double salario) {
+	public Funcionario(int id, String nome, String endereco, String sexo, String dataAniversario, double salario,
+			List<Dependente> dependentes) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -39,6 +47,7 @@ public abstract class Funcionario {
 		this.sexo = sexo;
 		this.dataAniversario = dataAniversario;
 		this.salario = salario;
+		this.dependentes = dependentes;
 	}
 
 	public int getId() {
@@ -87,6 +96,14 @@ public abstract class Funcionario {
 
 	public void setSalario(double salario) {
 		this.salario = salario;
+	}
+
+	public List<Dependente> getDependentes() {
+		return dependentes;
+	}
+
+	public void setDependentes(List<Dependente> dependentes) {
+		this.dependentes = dependentes;
 	}
 
 	@Override

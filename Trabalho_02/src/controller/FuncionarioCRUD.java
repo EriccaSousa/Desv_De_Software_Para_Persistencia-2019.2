@@ -49,7 +49,7 @@ public class FuncionarioCRUD {
 			String jornadaTrab = read.nextLine();
 
 			FuncionarioLimpeza funcionarioLimpeza = new FuncionarioLimpeza(nome, endereco, sexo, dataAniver, salario,
-					cargo, jornadaTrab);
+					null, cargo, jornadaTrab);
 
 			return funcionarioLimpeza;
 
@@ -57,14 +57,14 @@ public class FuncionarioCRUD {
 			System.out.println("Grau de escolaridade: ");
 			String grauEscolar = read.nextLine();
 
-			Funcionario secretario = new Secretario(nome, endereco, sexo, dataAniver, salario, grauEscolar);
+			Funcionario secretario = new Secretario(nome, endereco, sexo, dataAniver, salario, null, grauEscolar);
 
 			return secretario;
 		} else if (opcao == 3) {
 			System.out.println("Área atuação: ");
 			String areaAtuacao = read.nextLine();
 
-			Funcionario pesquisador = new Pesquisador(nome, endereco, sexo, dataAniver, salario, areaAtuacao);
+			Funcionario pesquisador = new Pesquisador(nome, endereco, sexo, dataAniver, salario, null, areaAtuacao);
 			return pesquisador;
 		} else {
 			System.out.println("Opção inválida");

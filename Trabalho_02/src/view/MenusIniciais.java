@@ -26,7 +26,7 @@ public class MenusIniciais {
 				MenusProjeto.menuInicialByProjeto();
 				break;
 			case 4:
-				// MenusDependentes.menuInicialByDependente();
+				MenusDependente.menuInicialByDependente();
 				break;
 			case 5:
 				System.out.println("FIM");
