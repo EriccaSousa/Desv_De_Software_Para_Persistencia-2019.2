@@ -49,7 +49,7 @@ public class MenusIniciais {
 
 			switch (opcao) {
 			case 1:
-
+				MenusPesquisador.menuInicialByPesquisador();
 				break;
 			case 2:
 				// MenusFuncLimpeza.menuInicialByFuncLimpeza();

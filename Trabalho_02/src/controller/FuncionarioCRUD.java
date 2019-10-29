@@ -60,9 +60,7 @@ public class FuncionarioCRUD {
 			System.out.println("Área atuação: ");
 			String areaAtuacao = read.nextLine();
 
-			Funcionario pesquisador = new Pesquisador(0, areaAtuacao, areaAtuacao, areaAtuacao, areaAtuacao, salario,
-					areaAtuacao);
-
+			Funcionario pesquisador = new Pesquisador(nome, endereco, sexo, dataAniver, salario, areaAtuacao);
 			return pesquisador;
 		} else {
 			System.out.println("Opção inválida");

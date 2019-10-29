@@ -9,6 +9,10 @@ public class Pesquisador extends Funcionario {
 
 	private String areaAtuacao;
 
+	public Pesquisador() {
+
+	}
+
 	public Pesquisador(String nome, String endereco, String sexo, String dataAniversario, double salario,
 			String areaAtuacao) {
 		this(0, nome, endereco, sexo, dataAniversario, salario, areaAtuacao);
