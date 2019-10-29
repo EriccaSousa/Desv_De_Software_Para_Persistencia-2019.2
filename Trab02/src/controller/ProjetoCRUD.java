@@ -141,6 +141,43 @@ public class ProjetoCRUD {
 		return projeto;
 	}
 
+	public static void deleteByNome1() {
+		ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
+		ProjetoDAO projetoDAO2 = new ProjetoJPA_DAO();
+
+		try {
+			projetoDAO.beginTransaction();
+
+			Projeto projeto = findByNome();
+
+			projeto.setDepartamento(null);
+
+			projetoDAO.delete(projeto);
+
+			projetoDAO.close();
+
+			projetoDAO2.beginTransaction();
+
+			Projeto projeto2 = findByNome();
+
+			projeto2.setDepartamento(null);
+
+			projetoDAO2.delete(projeto);
+
+			projetoDAO2.close();
+			System.out.println("Projeto deletado com sucesso!");
+			projetoDAO.commit();
+		} catch (IllegalStateException | PersistenceException e) {
+			System.out.println("Erro!");
+			projetoDAO.rollback();
+			e.printStackTrace();
+		} finally {
+			projetoDAO.close();
+		}
+
+		System.out.println("\n");
+	}
+
 	public static void deleteByNome() {
 		ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
 

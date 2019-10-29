@@ -76,7 +76,7 @@ public class MenusProjeto {
 
 			switch (opcao) {
 			case 1:
-				ProjetoCRUD.deleteByNome();
+				ProjetoCRUD.deleteByNome1();
 				break;
 			case 2:
 				// ProjetoCRUD.deleteById();
