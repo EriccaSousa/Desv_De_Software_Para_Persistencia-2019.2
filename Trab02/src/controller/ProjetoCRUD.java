@@ -8,104 +8,118 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
-import dao.DepartamentoDAO;
-import dao.DepartamentoJPA_DAO;
 import dao.ProjetoDAO;
 import dao.ProjetoJPA_DAO;
 import model.Departamento;
 import model.Projeto;
+import util.VerificacoesUtil;
 
 public class ProjetoCRUD {
 	static Scanner read = new Scanner(System.in);
 
 	public static void criarProjeto() {
-		ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
 
-		try {
-			projetoDAO.beginTransaction();
+		System.out.println("Informe os dados para Projeto\n");
+		System.out.println("Nome: ");
+		String nome = read.nextLine();
 
-			System.out.println("Informe os dados para Projeto\n");
-			System.out.println("Nome: ");
-			String nome = read.nextLine();
-			System.out.println("Período: ");
-			String periodo = read.nextLine();
+		if (VerificacoesUtil.verificaExistenciaProjetos(nome) == true) {
 
-			Departamento departamento = DepartamentoCRUD.findById();
+			System.out.println("Informe o nome do Departamento respónsável: ");
+			String nomeDep = read.nextLine();
 
-			projetoDAO.save(new Projeto(nome, periodo, departamento));
-			projetoDAO.commit();
+			Departamento departamento = DepartamentoCRUD.findByNome(nomeDep);
 
-			System.out.println("\nProjeto salvo com sucesso!\n");
-		} catch (IllegalStateException | PersistenceException e) {
-			System.out.println("\nErro ao salvar Projeto!\n");
+			if (departamento != null) {
+				System.out.println("Período: ");
+				String periodo = read.nextLine();
 
-			projetoDAO.rollback();
-			e.printStackTrace();
-		} finally {
-			projetoDAO.close();
+				ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
+
+				try {
+					projetoDAO.beginTransaction();
+
+					projetoDAO.save(new Projeto(nome, periodo, departamento));
+					projetoDAO.commit();
+
+					System.out.println("\nProjeto salvo com sucesso!\n");
+
+				} catch (IllegalStateException | PersistenceException e) {
+					System.out.println("\nErro ao salvar Projeto!\n");
+
+					projetoDAO.rollback();
+					e.printStackTrace();
+				} finally {
+					projetoDAO.close();
+				}
+
+			} else {
+				System.out.println("\nO Departamento informado não existe no sistema.\n");
+			}
+
+		} else {
+			System.out.println(
+					"\nJá existe um Projeto com esse nome cadastrado no sistema.\nPor favor, escolha outro nome.");
 		}
 
 	}
 
-	/*
-	 * Buscando todos os Projetos;
-	 */
 	public static void findAll() {
-		ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
+		try {
+			ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
 
-		List<Projeto> projetos = projetoDAO.findAll();
-		projetoDAO.close();
+			List<Projeto> projetos = projetoDAO.findAll();
+			projetoDAO.close();
 
-		System.out.println("\n");
-		for (Projeto projeto : projetos) {
-			System.out.println(projeto);
+			System.out.println("\n");
+			for (Projeto projeto : projetos) {
+				System.out.println(projeto);
+			}
+			System.out.println("\n");
+		} catch (Exception e) {
+			System.out.println("\nNão há Projetos cadastrados.\n");
 		}
-		System.out.println("\n");
 	}
 
-	/*
-	 * Buscando todos os Projetos por nome;
-	 */
-	public static void findByNome() {
-		ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
+	public static Projeto findByNome() {
+		Projeto projeto = null;
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
+		EntityManager em = emf.createEntityManager();
 
 		System.out.println("Informe o nome: ");
 		String nome = read.nextLine();
 
-		List<Projeto> projetos = projetoDAO.findByNome(nome);
-
-		projetoDAO.close();
-
-		System.out.println("\n");
-		for (Projeto projeto : projetos) {
-			System.out.println(projeto);
+		try {
+			projeto = (Projeto) em.createQuery("SELECT p FROM Projeto p WHERE p.nome LIKE :nome")
+					.setParameter("nome", nome + "%").getSingleResult();
+		} catch (Exception e) {
+			if (projeto == null) {
+				System.out.println("\nO nome informado não corresponde a nenhum Departamento cadastrado no sistema.\n");
+			}
 		}
-		System.out.println("\n");
+
+		return projeto;
 	}
 
-	/*
-	 * Buscando todos os Projetos por id;
-	 */
-	public static void findById1() {
-		ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
+	public static Projeto findByNome(String nome) {
+		Projeto projeto = null;
 
-		System.out.println("Informe o número de identificação: ");
-		int id = read.nextInt();
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
+		EntityManager em = emf.createEntityManager();
 
-		List<Projeto> projetos = projetoDAO.findById(id);
-
-		projetoDAO.close();
-
-		System.out.println("\n");
-		for (Projeto projeto : projetos) {
-			System.out.println(projeto);
+		try {
+			projeto = (Projeto) em.createQuery("SELECT p FROM Projeto p WHERE p.nome LIKE :nome")
+					.setParameter("nome", nome + "%").getSingleResult();
+		} catch (Exception e) {
+			if (projeto == null) {
+				System.out.println("\nNome aceito.\n");
+			}
 		}
-		System.out.println("\n");
+
+		return projeto;
 	}
 
-	/*
-	 * Buscando departamento por id, e retornando.
-	 */
 	public static Projeto findById() {
 		Projeto projeto = null;
 
@@ -116,19 +130,42 @@ public class ProjetoCRUD {
 		String id = read.nextLine();
 
 		try {
-			projeto = (Projeto) em.createQuery("SELECT p FROM Projeto p WHERE p.id LIKE :id")
+			projeto = (Projeto) em.createQuery("SELECT p FROM Projeto p WHERE p.id_projeto LIKE :id")
 					.setParameter("id", id + "%").getSingleResult();
 			em.close();
 		} catch (Exception e) {
-			System.out.println("Erro!");
-			e.printStackTrace();
+			System.out.println("\nO nome informado não corresponde a nenhum Departamento cadastrado no sistema.\n");
+
 		}
 
 		return projeto;
 	}
 
+	public static void deleteByNome() {
+		ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
+
+		try {
+			projetoDAO.beginTransaction();
+
+			projetoDAO.delete(findByNome());
+
+			projetoDAO.close();
+			System.out.println("Projeto deletado com sucesso!");
+			projetoDAO.commit();
+		} catch (IllegalStateException | PersistenceException e) {
+			System.out.println("Erro!");
+			projetoDAO.rollback();
+			e.printStackTrace();
+		} finally {
+			projetoDAO.close();
+		}
+
+		System.out.println("\n");
+	}
+
 	public static void deleteById() {
 		ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
+
 		try {
 			projetoDAO.beginTransaction();
 
