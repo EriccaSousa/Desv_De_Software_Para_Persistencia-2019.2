@@ -21,7 +21,7 @@ public class Departamento {
 	@Column(name = "departamento_id")
 	private int id;
 	private String nome;
-	@OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "departamento", fetch = FetchType.EAGER)
 	private List<Projeto> projetos;
 
 	public Departamento() {

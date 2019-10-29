@@ -1,7 +1,17 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Dependente {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "dependente_id")
 	private int id;
 	private String nome;
 	private String dataAniver;
@@ -12,9 +22,8 @@ public class Dependente {
 
 	}
 
-	public Dependente(int id, String nome, String dataAniver, String grauParentesco, Funcionario funcionario) {
+	public Dependente(String nome, String dataAniver, String grauParentesco, Funcionario funcionario) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.dataAniver = dataAniver;
 		this.grauParentesco = grauParentesco;

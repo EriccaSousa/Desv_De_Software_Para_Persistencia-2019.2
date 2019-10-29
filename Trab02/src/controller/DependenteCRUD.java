@@ -16,26 +16,28 @@ import model.Funcionario;
 public class DependenteCRUD {
 	static Scanner read = new Scanner(System.in);
 
-	public static void criarDependente() {
+	
+	public static Dependente retornarDependente(int valor) {
+		System.out.println("Informe os dados para Dependente\n");
+		System.out.println("Nome: ");
+		String nome = read.nextLine();
+		System.out.println("Data Aniversario: ");
+		String dataAniver = read.nextLine();
+		System.out.println("Grau de parentesco: ");
+		String parentesco = read.nextLine();
+		
+		Funcionario funcionario = FuncionarioDependente(valor);
+		Dependente dependente = new Dependente(nome, dataAniver, parentesco, funcionario);
+		return dependente;
+	}
+	public static void criarDependente(int valor) {
 		DependenteDAO dependenteDAO = new DependenteJPA_DAO();
-
+		
 		try {
 			dependenteDAO.beginTransaction();
 
-			System.out.println("Informe os dados para Dependente\nNúmero de identificação: ");
-			String id = read.nextLine();
-			System.out.println("Nome: ");
-			String nome = read.nextLine();
-			System.out.println("Data Aniversário: ");
-			String dataAniver = read.nextLine();
-			System.out.println("Grau de parentesco: ");
-			String parentesco = read.nextLine();
-
-			Funcionario parente = FuncionarioDependente();
-
-			dependenteDAO.save(new Dependente(id, nome, dataAniver, parentesco, parente));
+			dependenteDAO.save(retornarDependente(valor));
 			dependenteDAO.commit();
-			System.out.println(parente);
 		} catch (IllegalStateException | PersistenceException e) {
 			System.out.println("\nErro ao salvar Dependente!\n");
 
@@ -47,12 +49,8 @@ public class DependenteCRUD {
 
 	}
 
-	public static Funcionario FuncionarioDependente() {
+	public static Funcionario FuncionarioDependente(int opcao) {
 		Funcionario funcionario = null;
-
-		System.out.println(
-				"Informe a função do seu agregado:\n[ 1 ] Funcionário de Limpeza\n[ 2 ] Secretário(a)\n[ 3 ] Pesquisador(a)");
-		int opcao = read.nextInt();
 
 		if (opcao == 1) {
 			funcionario = null;
