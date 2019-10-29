@@ -3,8 +3,6 @@ package view;
 import java.util.Scanner;
 
 import controller.DepartamentoCRUD;
-import controller.DependenteCRUD;
-import controller.SecretarioCRUD;
 
 public class MenusDepartamento {
 	static Scanner read = new Scanner(System.in);
@@ -52,10 +50,10 @@ public class MenusDepartamento {
 				DepartamentoCRUD.findAll();
 				break;
 			case 2:
-				DepartamentoCRUD.findByNome();
+				System.out.println("\n" + DepartamentoCRUD.findByNome() + "\n");
 				break;
 			case 3:
-				DepartamentoCRUD.findById1();
+				// System.out.println("\n" + DepartamentoCRUD.findById() + "\n");
 				break;
 			case 4:
 				menuInicialByDepartamento();
@@ -78,10 +76,10 @@ public class MenusDepartamento {
 
 			switch (opcao) {
 			case 1:
-				// DepartamentoCRUD.deleteByNome();
+				DepartamentoCRUD.deleteByNome();
 				break;
 			case 2:
-				DepartamentoCRUD.deleteById();
+				// DepartamentoCRUD.deleteById();
 				break;
 			case 3:
 				menuInicialByDepartamento();

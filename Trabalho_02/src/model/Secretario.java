@@ -13,9 +13,9 @@ public class Secretario extends Funcionario {
 
 	}
 
-	public Secretario(String nome, String endereco, String sexo, String dataAniversario, double salario
-			, String grauEscolaridade, Departamento departamento) {
-		super(nome, endereco, sexo, dataAniversario, salario, departamento);
+	public Secretario(int id, String nome, String endereco, String sexo, String dataAniversario, double salario,
+			List<Dependente> dependentes, String grauEscolaridade) {
+		super(id, nome, endereco, sexo, dataAniversario, salario, dependentes);
 		this.grauEscolaridade = grauEscolaridade;
 	}
 
