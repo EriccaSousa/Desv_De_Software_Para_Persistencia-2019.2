@@ -23,17 +23,19 @@ public class Departamento {
 	private String nome;
 	@OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL)
 	private List<Projeto> projetos;
+	@OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL)
+	private List<Funcionario> funcionarios;
 
 	public Departamento() {
 
 	}
 
-	public Departamento(String nome, List<Projeto> projetos) {
-		this(0, nome, projetos);
+	public Departamento(String nome, List<Projeto> projetos, List<Funcionario> funcionarios) {
+		this(0, nome, projetos, funcionarios);
 
 	}
 
-	public Departamento(int id, String nome, List<Projeto> projetos) {
+	public Departamento(int id, String nome, List<Projeto> projetos, List<Funcionario> funcionarios) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -63,6 +65,14 @@ public class Departamento {
 
 	public void setProjetos(List<Projeto> projetos) {
 		this.projetos = projetos;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 
 	@Override

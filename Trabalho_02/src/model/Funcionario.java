@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -27,6 +29,9 @@ public abstract class Funcionario {
 	private double salario;
 	@OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
 	private List<Dependente> dependentes;
+	@ManyToOne
+	@JoinColumn(name = "departamento_id")
+	private Departamento departamento;
 
 	public Funcionario() {
 		super();
@@ -34,12 +39,12 @@ public abstract class Funcionario {
 	}
 
 	public Funcionario(String nome, String endereco, String sexo, String dataAniversario, double salario,
-			List<Dependente> dependentes) {
-		this(0, nome, endereco, sexo, dataAniversario, salario, dependentes);
+			List<Dependente> dependentes, Departamento departamento) {
+		this(0, nome, endereco, sexo, dataAniversario, salario, dependentes, departamento);
 	}
 
 	public Funcionario(int id, String nome, String endereco, String sexo, String dataAniversario, double salario,
-			List<Dependente> dependentes) {
+			List<Dependente> dependentes, Departamento departamento) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -48,6 +53,7 @@ public abstract class Funcionario {
 		this.dataAniversario = dataAniversario;
 		this.salario = salario;
 		this.dependentes = dependentes;
+		this.departamento = departamento;
 	}
 
 	public int getId() {
@@ -106,10 +112,19 @@ public abstract class Funcionario {
 		this.dependentes = dependentes;
 	}
 
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
 	@Override
 	public String toString() {
 		return "\nFuncionario\nId: " + this.id + "Nome: " + this.nome + "\nEndereco: " + this.endereco + "\nSexo: "
-				+ this.sexo + "\nData Aniversario: " + this.dataAniversario + "Salario: " + this.salario + "\n";
+				+ this.sexo + "\nData Aniversario: " + this.dataAniversario + "Salario: " + this.salario
+				+ "\nDepartamento" + this.departamento + "\n";
 	}
 
 }

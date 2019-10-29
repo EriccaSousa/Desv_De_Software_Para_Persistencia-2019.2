@@ -23,7 +23,7 @@ public class DepartamentoCRUD {
 		String nome = read.nextLine();
 
 		if (VerificacoesUtil.verificaExistenciaDepartamento(nome) == true) {
-			Departamento departamento = new Departamento(nome, null);
+			Departamento departamento = new Departamento(nome, null, null);
 
 			DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();
 

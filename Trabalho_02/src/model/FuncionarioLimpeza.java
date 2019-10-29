@@ -17,13 +17,13 @@ public class FuncionarioLimpeza extends Funcionario {
 	}
 
 	public FuncionarioLimpeza(String nome, String endereco, String sexo, String dataAniversario, double salario,
-			List<Dependente> dependentes, String cargo, String jornadaTrab) {
-		this(0, nome, endereco, sexo, dataAniversario, salario, dependentes, cargo, jornadaTrab);
+			List<Dependente> dependentes, Departamento departamento, String cargo, String jornadaTrab) {
+		this(0, nome, endereco, sexo, dataAniversario, salario, dependentes, departamento, cargo, jornadaTrab);
 	}
 
 	public FuncionarioLimpeza(int id, String nome, String endereco, String sexo, String dataAniversario, double salario,
-			List<Dependente> dependentes, String cargo, String jornadaTrab) {
-		super(id, nome, endereco, sexo, dataAniversario, salario, dependentes);
+			List<Dependente> dependentes, Departamento departamento, String cargo, String jornadaTrab) {
+		super(id, nome, endereco, sexo, dataAniversario, salario, dependentes, departamento);
 		this.cargo = cargo;
 		this.jornadaTrab = jornadaTrab;
 	}
@@ -49,7 +49,7 @@ public class FuncionarioLimpeza extends Funcionario {
 		return "Função: Secretario" + "\nId: " + this.getId() + "\nNome: " + this.getNome() + "\nEndereço: "
 				+ this.getEndereco() + "\nSexo: " + this.getSexo() + "\nData Aniversário: " + this.getDataAniversario()
 				+ "\nSalário: " + this.getSalario() + "\nCargo: " + this.cargo + "\nJornadaTrab: " + this.jornadaTrab
-				+ "\n";
+				+ "\nDepartamento" + this.getDepartamento() + "\n";
 	}
 
 }

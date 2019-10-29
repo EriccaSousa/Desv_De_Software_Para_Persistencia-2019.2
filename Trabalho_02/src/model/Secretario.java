@@ -16,13 +16,13 @@ public class Secretario extends Funcionario {
 	}
 
 	public Secretario(String nome, String endereco, String sexo, String dataAniversario, double salario,
-			List<Dependente> dependentes, String grauEscolar) {
-		this(0, nome, endereco, sexo, dataAniversario, salario, dependentes, grauEscolar);
+			List<Dependente> dependentes, Departamento departamento, String grauEscolar) {
+		this(0, nome, endereco, sexo, dataAniversario, salario, dependentes, departamento, grauEscolar);
 	}
 
 	public Secretario(int id, String nome, String endereco, String sexo, String dataAniversario, double salario,
-			List<Dependente> dependentes, String grauEscolar) {
-		super(id, nome, endereco, sexo, dataAniversario, salario, dependentes);
+			List<Dependente> dependentes, Departamento departamento, String grauEscolar) {
+		super(id, nome, endereco, sexo, dataAniversario, salario, dependentes, departamento);
 		this.grauEscolaridade = grauEscolar;
 
 	}
@@ -39,7 +39,8 @@ public class Secretario extends Funcionario {
 	public String toString() {
 		return "Função: Secretario" + "\nId: " + this.getId() + "\nNome: " + this.getNome() + "\nEndereço: "
 				+ this.getEndereco() + "\nSexo: " + this.getSexo() + "\nData Aniversário: " + this.getDataAniversario()
-				+ "\nSalário: " + this.getSalario() + "\ngrauEscolaridade: " + this.grauEscolaridade + "\n";
+				+ "\nSalário: " + this.getSalario() + "\ngrauEscolaridade: " + this.grauEscolaridade
+				+ "\nDepartamento: " + this.getDepartamento() + "\n";
 	}
 
 }
