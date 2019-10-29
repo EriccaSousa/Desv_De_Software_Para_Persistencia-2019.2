@@ -50,10 +50,10 @@ public class MenusProjeto {
 				ProjetoCRUD.findAll();
 				break;
 			case 2:
-				System.out.println("\n" + ProjetoCRUD.findByNome() + "\n");
+				ProjetoCRUD.findByNome();
 				break;
 			case 3:
-				// System.out.println("\n" + ProjetoCRUD.findById() + "\n");
+				System.out.println("\n" + ProjetoCRUD.findById() + "\n");
 				break;
 			case 4:
 				menuInicialByProjeto();
@@ -76,10 +76,10 @@ public class MenusProjeto {
 
 			switch (opcao) {
 			case 1:
-				ProjetoCRUD.deleteByNome();
+				// ProjetoCRUD.deleteByNome();
 				break;
 			case 2:
-				// ProjetoCRUD.deleteById();
+				ProjetoCRUD.deleteById();
 				break;
 			case 3:
 				menuInicialByProjeto();

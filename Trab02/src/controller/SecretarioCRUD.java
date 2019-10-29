@@ -37,7 +37,7 @@ public class SecretarioCRUD {
 			System.out.println("Grau de Escolaridade: ");
 			String grauEscolar = read.nextLine();
 
-			secretarioDAO.save(new Secretario(id, nome, endereco, sexo, dataAniver, salario, null, grauEscolar));
+			secretarioDAO.save(new Secretario());
 			secretarioDAO.commit();
 		} catch (IllegalStateException | PersistenceException e) {
 			System.out.println("\nErro ao salvar Secretário(a)!\n");

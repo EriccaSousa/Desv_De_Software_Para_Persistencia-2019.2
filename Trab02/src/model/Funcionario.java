@@ -2,8 +2,18 @@ package model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public abstract class Funcionario {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "funcionario_id")
 	private int id;
 	private String nome;
 	private String endereco;
@@ -11,22 +21,22 @@ public abstract class Funcionario {
 	private String dataAniversario;
 	private double salario;
 	private List<Dependente> dependentes;
+	private Departamento departamento;
 
 	public Funcionario() {
 		super();
 
 	}
 
-	public Funcionario(int id, String nome, String endereco, String sexo, String dataAniversario, double salario,
-			List<Dependente> dependentes) {
+	public Funcionario(String nome, String endereco, String sexo, String dataAniversario, double salario,
+			Departamento departamento) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.sexo = sexo;
 		this.dataAniversario = dataAniversario;
 		this.salario = salario;
-		this.dependentes = dependentes;
+		this.departamento = departamento;
 
 	}
 
