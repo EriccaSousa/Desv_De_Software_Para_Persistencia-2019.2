@@ -15,6 +15,7 @@ import model.Departamento;
 import model.Funcionario;
 import model.FuncionarioLimpeza;
 import model.Pesquisador;
+import model.Projeto;
 import model.Secretario;
 
 public class FuncionarioCRUD {
@@ -57,14 +58,19 @@ public class FuncionarioCRUD {
 			System.out.println("Grau de escolaridade: ");
 			String grauEscolar = read.nextLine();
 
-			Funcionario secretario = new Secretario(nome, endereco, sexo, dataAniver, salario, null, departamento, grauEscolar);
+			Funcionario secretario = new Secretario(nome, endereco, sexo, dataAniver, salario, null, departamento,
+					grauEscolar);
 
 			return secretario;
 		} else if (opcao == 3) {
 			System.out.println("Área atuação: ");
 			String areaAtuacao = read.nextLine();
 
-			Funcionario pesquisador = new Pesquisador(nome, endereco, sexo, dataAniver, salario, null, departamento, areaAtuacao);
+			System.out.println("Informações do projeto em que irá trabalhara:");
+			Projeto projeto = ProjetoCRUD.findByNome();
+
+			Funcionario pesquisador = new Pesquisador(nome, endereco, sexo, dataAniver, salario, null, departamento,
+					areaAtuacao, projeto);
 			return pesquisador;
 		} else {
 			System.out.println("Opção inválida");

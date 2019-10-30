@@ -11,6 +11,8 @@ import javax.persistence.PersistenceException;
 import dao.ProjetoDAO;
 import dao.ProjetoJPA_DAO;
 import model.Departamento;
+import model.Funcionario;
+import model.Pesquisador;
 import model.Projeto;
 import util.VerificacoesUtil;
 
@@ -34,12 +36,16 @@ public class ProjetoCRUD {
 				System.out.println("Período: ");
 				String periodo = read.nextLine();
 
+				System.out.println("Adicione um pesquisador ao projeto: ");
+
+				Pesquisador pesquisador = null;
+
 				ProjetoDAO projetoDAO = new ProjetoJPA_DAO();
 
 				try {
 					projetoDAO.beginTransaction();
 
-					projetoDAO.save(new Projeto(nome, periodo, departamento));
+					projetoDAO.save(new Projeto(nome, periodo, departamento, null));
 					projetoDAO.commit();
 
 					System.out.println("\nProjeto salvo com sucesso!\n");
