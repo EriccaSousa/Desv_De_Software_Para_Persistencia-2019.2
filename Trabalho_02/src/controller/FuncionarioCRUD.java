@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import javax.persistence.PersistenceException;
 
-import dao.FuncionarioJPA_DAO;
 import dao.FuncionarioLimpezaDAO;
 import dao.FuncionarioLimpezaJPA_DAO;
 import dao.PesquisadorDAO;

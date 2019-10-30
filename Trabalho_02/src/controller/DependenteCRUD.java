@@ -10,10 +10,7 @@ import javax.persistence.PersistenceException;
 
 import dao.DependenteDAO;
 import dao.DependenteJPA_DAO;
-import dao.ProjetoDAO;
-import dao.ProjetoJPA_DAO;
 import model.Dependente;
-import model.Projeto;
 
 public class DependenteCRUD {
 

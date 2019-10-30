@@ -2,7 +2,6 @@ package view;
 
 import java.util.Scanner;
 
-import controller.DepartamentoCRUD;
 import controller.ProjetoCRUD;
 
 public class MenusProjeto {

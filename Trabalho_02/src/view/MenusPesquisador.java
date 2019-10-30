@@ -3,6 +3,7 @@ package view;
 import java.util.Scanner;
 
 import controller.FuncionarioCRUD;
+import controller.PesquisadorCRUD;
 
 public class MenusPesquisador {
 	static Scanner read = new Scanner(System.in);
@@ -48,10 +49,10 @@ public class MenusPesquisador {
 
 			switch (opcao) {
 			case 1:
-
+				PesquisadorCRUD.findAll();
 				break;
 			case 2:
-
+				System.out.println("\n" + PesquisadorCRUD.findByNome() + "\n");
 				break;
 			case 3:
 

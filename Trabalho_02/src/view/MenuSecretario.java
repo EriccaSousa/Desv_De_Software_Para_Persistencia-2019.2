@@ -3,6 +3,7 @@ package view;
 import java.util.Scanner;
 
 import controller.FuncionarioCRUD;
+import controller.SecretarioCRUD;
 
 public class MenuSecretario {
 
@@ -49,10 +50,10 @@ public class MenuSecretario {
 
 			switch (opcao) {
 			case 1:
-				// SecretarioCRUD.findAll();
+				SecretarioCRUD.findAll();
 				break;
 			case 2:
-				// System.out.println(SecretarioCRUD.findByNome());
+				System.out.println("\n" + SecretarioCRUD.findByNome() + "\n");
 				break;
 			case 3:
 				// System.out.println(SecretarioCRUD.findById());

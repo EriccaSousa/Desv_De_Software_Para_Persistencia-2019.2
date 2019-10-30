@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import controller.FuncLimpezaCRUD;
 import controller.FuncionarioCRUD;
 
 public class MenusFuncLimpeza {
@@ -48,10 +49,10 @@ public class MenusFuncLimpeza {
 
 			switch (opcao) {
 			case 1:
-
+				FuncLimpezaCRUD.findAll();
 				break;
 			case 2:
-
+				System.out.println("\n" + FuncLimpezaCRUD.findByNome() + "\n");
 				break;
 			case 3:
 

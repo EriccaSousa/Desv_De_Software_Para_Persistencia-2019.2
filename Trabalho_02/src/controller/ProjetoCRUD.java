@@ -11,7 +11,6 @@ import javax.persistence.PersistenceException;
 import dao.ProjetoDAO;
 import dao.ProjetoJPA_DAO;
 import model.Departamento;
-import model.Funcionario;
 import model.Pesquisador;
 import model.Projeto;
 import util.VerificacoesUtil;
