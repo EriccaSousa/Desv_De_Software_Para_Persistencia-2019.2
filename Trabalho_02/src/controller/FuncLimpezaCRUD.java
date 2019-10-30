@@ -19,7 +19,10 @@ public class FuncLimpezaCRUD {
 
 		List<FuncionarioLimpeza> funcionariosLimpeza = funcLimpezaDAO.findAll();
 		funcLimpezaDAO.close();
-
+		if(funcionariosLimpeza == null) {
+			System.out.println("Não existe nenhum funcionario de limpeza cadastrado no banco");
+			return;
+		}
 		for (FuncionarioLimpeza funcionarioLimpeza : funcionariosLimpeza) {
 			System.out.println(funcionarioLimpeza);
 		}
@@ -40,7 +43,8 @@ public class FuncLimpezaCRUD {
 					.createQuery("SELECT fl FROM FuncionarioLimpeza fl WHERE fl.nome LIKE :nome")
 					.setParameter("nome", nome + "%").getSingleResult();
 		} catch (Exception e) {
-			System.out.println("Erro!");
+			if(funcLimpeza == null)
+				System.out.println("Funcionario de limpeza não foi encontrado ou não existe no banco!");
 			e.printStackTrace();
 		}
 
