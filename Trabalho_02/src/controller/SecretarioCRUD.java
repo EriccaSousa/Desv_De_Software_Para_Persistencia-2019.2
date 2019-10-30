@@ -22,12 +22,14 @@ public class SecretarioCRUD {
 
 		System.out.println("Informe o nome: ");
 		String nome = read.nextLine();
-
+		
 		try {
 			secretario = (Secretario) em.createQuery("SELECT s FROM Secretario s WHERE s.nome LIKE :nome")
 					.setParameter("nome", nome + "%").getSingleResult();
 		} catch (Exception e) {
-			System.out.println("Erro!");
+			if(secretario == null) {
+				System.out.println("Não existe secretario cadastrado no banco ou não foi encontrado");
+			}
 			e.printStackTrace();
 		}
 
@@ -39,7 +41,10 @@ public class SecretarioCRUD {
 
 		List<Secretario> secretarios = secretarioDAO.findAll();
 		secretarioDAO.close();
-
+		if(secretarios == null) {
+			System.out.println("Não existe nenhum secretário cadastrado no banco");
+			return;
+		}
 		System.out.println("\n");
 		for (Secretario secretario : secretarios) {
 			System.out.println(secretario);

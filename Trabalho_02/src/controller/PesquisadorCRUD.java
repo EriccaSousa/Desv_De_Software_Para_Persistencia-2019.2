@@ -20,7 +20,10 @@ public class PesquisadorCRUD {
 
 		List<Pesquisador> pesquisadores = pesquisadorDAO.findAll();
 		pesquisadorDAO.close();
-
+		if(pesquisadores == null) {
+			System.out.println("Não existe nenhum pesquisador cadastrado no banco");
+			return;
+		}
 		for (Pesquisador pesquisador : pesquisadores) {
 			System.out.println(pesquisador);
 		}
@@ -40,7 +43,9 @@ public class PesquisadorCRUD {
 			pesquisadorTemp = (Pesquisador) em.createQuery("SELECT p FROM Pesquisador p WHERE p.nome LIKE :nome")
 					.setParameter("nome", nome + "%").getSingleResult();
 		} catch (Exception e) {
-			System.out.println("Erro!");
+			if(pesquisadorTemp == null) {
+				System.out.println("Pesquisador não existe no banco ou não foi encontrado!");
+			}
 			e.printStackTrace();
 		}
 
