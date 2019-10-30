@@ -1,24 +1,21 @@
 package view;
 
-import java.util.Scanner;
-
 import controller.FuncLimpezaCRUD;
 import controller.FuncionarioCRUD;
+import util.TextosUtil;
 
 public class MenusFuncLimpeza {
-	static Scanner read = new Scanner(System.in);
+
 	static int opcao;
 
 	public static void menuInicialByFuncLimpeza() {
 		do {
-			System.out.println("Menu Funcionário Limpeza:");
-			System.out.println("[ 1 ] Cadastra Funcionário Limpeza\n[ 2 ] Buscar Funcionário Limpeza \n[ 3 ] Voltar ");
-			System.out.print("Escolha uma opção: ");
-			opcao = read.nextInt();
+			System.out.println("\n\t--- Funcionários de Limpeza ---");
+
+			opcao = TextosUtil.menuCRUDs();
 
 			switch (opcao) {
 			case 1:
-				System.out.println("Aqui!");
 				FuncionarioCRUD.criarFuncLmpeza(1);
 				break;
 			case 2:
@@ -31,7 +28,7 @@ public class MenusFuncLimpeza {
 				MenusIniciais.menuFuncionarios();
 				break;
 			default:
-				System.out.println("Opção inválida!");
+				TextosUtil.textoDefault();
 				break;
 			}
 
@@ -40,11 +37,9 @@ public class MenusFuncLimpeza {
 
 	public static void menuBuscarByFuncLimpeza() {
 		do {
-			System.out.println("Menu Pesquisar Funcionário Limpeza:");
-			System.out.println(
-					"[ 1 ] Listar todos os Funcionário Limpeza\n[ 2 ] Buscar Funcionário Limpeza por nome\n[ 3 ] Voltar ");
-			System.out.print("Escolha uma opção: ");
-			opcao = read.nextInt();
+			System.out.println("\n\t--- Buscar Funcionários de Limpeza:");
+
+			opcao = TextosUtil.menuBuscar();
 
 			switch (opcao) {
 			case 1:
@@ -57,7 +52,7 @@ public class MenusFuncLimpeza {
 				menuInicialByFuncLimpeza();
 				break;
 			default:
-				System.out.println("Opção inválida!");
+				TextosUtil.textoDefault();
 				break;
 			}
 

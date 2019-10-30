@@ -1,19 +1,17 @@
 package view;
 
-import java.util.Scanner;
-
 import controller.ProjetoCRUD;
+import util.TextosUtil;
 
 public class MenusProjeto {
-	static Scanner read = new Scanner(System.in);
+
 	static int opcao;
 
 	public static void menuInicialByProjeto() {
 		do {
-			System.out.println("Menu Projeto:");
-			System.out.println("[ 1 ] Cadastrar Projeto\n[ 2 ] Buscar Projeto\n[ 3 ] Deletar Projeto\n[ 4 ] Voltar ");
-			System.out.print("Escolha uma opção: ");
-			opcao = read.nextInt();
+			System.out.println("\n\t--- Menu Projetos ---");
+
+			opcao = TextosUtil.menuCRUDs();
 
 			switch (opcao) {
 			case 1:
@@ -29,7 +27,7 @@ public class MenusProjeto {
 				MenusIniciais.menuInicial();
 				break;
 			default:
-				System.out.println("Opção inválida!");
+				TextosUtil.textoDefault();
 				break;
 			}
 
@@ -38,10 +36,9 @@ public class MenusProjeto {
 
 	public static void menuBuscarByProjeto() {
 		do {
-			System.out.println("Menu Pesquisar Projeto:");
-			System.out.println("[ 1 ] Listar todos os Projetos\n[ 2 ] Buscar Projetos por nome\n[ 3 ] Voltar ");
-			System.out.print("Escolha uma opção: ");
-			opcao = read.nextInt();
+			System.out.println("\n\t--- Buscar Projetos ---");
+
+			opcao = TextosUtil.menuBuscar();
 
 			switch (opcao) {
 			case 1:
@@ -54,7 +51,7 @@ public class MenusProjeto {
 				menuInicialByProjeto();
 				break;
 			default:
-				System.out.println("Opção inválida!");
+				TextosUtil.textoDefault();
 				break;
 			}
 

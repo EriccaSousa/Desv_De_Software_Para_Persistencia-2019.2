@@ -1,20 +1,17 @@
 package view;
 
-import java.util.Scanner;
-
 import controller.DependenteCRUD;
+import util.TextosUtil;
 
 public class MenusDependente {
-	static Scanner read = new Scanner(System.in);
+
 	static int opcao;
 
 	public static void menuInicialByDependente() {
 		do {
-			System.out.println("Menu Dependentes:");
-			System.out.println(
-					"[ 1 ] Cadastrar Dependentes\n[ 2 ] Buscar Dependentes \n[ 3 ] Deletar Dependentes \n[ 4 ] Voltar ");
-			System.out.print("Escolha uma opção: ");
-			opcao = read.nextInt();
+			System.out.println("\n\t--- Dependentes ---");
+
+			opcao = TextosUtil.menuCRUDs();
 
 			switch (opcao) {
 			case 1:
@@ -30,7 +27,7 @@ public class MenusDependente {
 				MenusIniciais.menuInicial();
 				break;
 			default:
-				System.out.println("Opção inválida!");
+				TextosUtil.textoDefault();
 				break;
 			}
 
@@ -39,10 +36,9 @@ public class MenusDependente {
 
 	public static void menuBuscarByDependente() {
 		do {
-			System.out.println("Menu Pesquisar Dependentes:");
-			System.out.println("[ 1 ] Listar todos os Dependentes\n[ 2 ] Buscar Dependentes por nome\n[ 3 ] Voltar ");
-			System.out.print("Escolha uma opção: ");
-			opcao = read.nextInt();
+			System.out.println("\n\t--- Buscar Dependentes ---");
+
+			opcao = TextosUtil.menuBuscar();
 
 			switch (opcao) {
 			case 1:
@@ -55,7 +51,7 @@ public class MenusDependente {
 				menuInicialByDependente();
 				break;
 			default:
-				System.out.println("Opção inválida!");
+				TextosUtil.textoDefault();
 				break;
 			}
 
