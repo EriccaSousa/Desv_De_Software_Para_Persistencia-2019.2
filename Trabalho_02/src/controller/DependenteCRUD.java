@@ -11,6 +11,7 @@ import javax.persistence.PersistenceException;
 import dao.DependenteDAO;
 import dao.DependenteJPA_DAO;
 import model.Dependente;
+import model.Funcionario;
 
 public class DependenteCRUD {
 
@@ -31,9 +32,9 @@ public class DependenteCRUD {
 			System.out.println("Grau de parentesco: ");
 			String parentesco = read.nextLine();
 
-			// Funcionario parente = FuncionarioDependente();
+			Funcionario funcionario = FuncionarioDependente();
 
-			dependenteDAO.save(new Dependente(nome, dataAniver, parentesco, null));
+			dependenteDAO.save(new Dependente(nome, dataAniver, parentesco, funcionario));
 			dependenteDAO.commit();
 		} catch (IllegalStateException | PersistenceException e) {
 			System.out.println("\nErro ao salvar Dependente!\n");
@@ -44,6 +45,26 @@ public class DependenteCRUD {
 			dependenteDAO.close();
 		}
 
+	}
+
+	public static Funcionario FuncionarioDependente() {
+		Funcionario funcionario = null;
+
+		System.out.println(
+				"Informe a função do seu agregado:\n[ 1 ] Funcionário de Limpeza\n[ 2 ] Secretário(a)\n[ 3 ] Pesquisador(a)");
+		int opcao = read.nextInt();
+
+		if (opcao == 1) {
+			funcionario = FuncLimpezaCRUD.findByNome();
+		} else if (opcao == 2) {
+			funcionario = SecretarioCRUD.findByNome();
+		} else if (opcao == 3) {
+			funcionario = PesquisadorCRUD.findByNome();
+		} else {
+			System.out.println("Opção inválida!");
+		}
+
+		return funcionario;
 	}
 
 	public static void findAll() {
