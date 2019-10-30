@@ -1,17 +1,20 @@
 package view;
 
+import java.util.Scanner;
+
 import controller.DepartamentoCRUD;
-import util.TextosUtil;
 
 public class MenusDepartamento {
-
+	static Scanner read = new Scanner(System.in);
 	static int opcao;
 
 	public static void menuInicialByDepartamento() {
 		do {
-			System.out.println("\n\t--- Departamentos ---");
-
-			opcao = TextosUtil.menuCRUDs();
+			System.out.println("Menu Departamento:");
+			System.out.println(
+					"[ 1 ] Cadastrar Departamentos\n[ 2 ] Buscar Departamentos\n[ 3 ] Deletar Departamentos\n[ 4 ] Voltar ");
+			System.out.print("Escolha uma opção: ");
+			opcao = read.nextInt();
 
 			switch (opcao) {
 			case 1:
@@ -27,7 +30,7 @@ public class MenusDepartamento {
 				MenusIniciais.menuFuncionarios();
 				break;
 			default:
-				TextosUtil.textoDefault();
+				System.out.println("Opção inválida!");
 				break;
 			}
 
@@ -36,9 +39,11 @@ public class MenusDepartamento {
 
 	public static void menuBuscarByDepartamento() {
 		do {
-			System.out.println("\n\t--- Buscar Departamentos ---");
-
-			opcao = TextosUtil.menuBuscar();
+			System.out.println("Menu Pesquisar Departamento:");
+			System.out
+					.println("[ 1 ] Listar todos os Departamentos\n[ 2 ] Buscar Departamentos por nome\n[ 3 ] Voltar ");
+			System.out.print("Escolha uma opção: ");
+			opcao = read.nextInt();
 
 			switch (opcao) {
 			case 1:
@@ -51,7 +56,7 @@ public class MenusDepartamento {
 				menuInicialByDepartamento();
 				break;
 			default:
-				TextosUtil.textoDefault();
+				System.out.println("Opção inválida!");
 				break;
 			}
 

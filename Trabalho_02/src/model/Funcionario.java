@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,6 +27,7 @@ public abstract class Funcionario {
 	private String endereco;
 	private String sexo;
 	private String dataAniversario;
+	private Date dataAniver;
 	private double salario;
 	@OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
 	private List<Dependente> dependentes;

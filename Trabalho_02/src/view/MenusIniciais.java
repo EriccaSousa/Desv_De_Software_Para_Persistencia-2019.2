@@ -1,15 +1,19 @@
 package view;
 
-import util.TextosUtil;
+import java.util.Scanner;
 
 public class MenusIniciais {
 
+	static Scanner read = new Scanner(System.in);
 	static int opcao;
 
 	public static void menuInicial() {
 		do {
-
-			opcao = TextosUtil.textoMenuInicial();
+			System.out.println("Menu Inicial:");
+			System.out
+					.println("[ 1 ] Departamentos\n[ 2 ] Funcionarios\n[ 3 ] Projetos\n[ 4 ] Dependentes\n[ 5 ] Sair");
+			System.out.print("Escolha uma opção: ");
+			opcao = read.nextInt();
 
 			switch (opcao) {
 			case 1:
@@ -25,11 +29,11 @@ public class MenusIniciais {
 				MenusDependente.menuInicialByDependente();
 				break;
 			case 5:
-				System.out.println("\nVolte sempre!\n");
+				System.out.println("FIM");
 				System.exit(0);
 				break;
 			default:
-				TextosUtil.textoDefault();
+				System.out.println("Opção inválida!");
 				break;
 			}
 
@@ -38,8 +42,10 @@ public class MenusIniciais {
 
 	public static void menuFuncionarios() {
 		do {
-
-			opcao = TextosUtil.textoMenuFuncionarios();
+			System.out.println("Menu Funcionarios:");
+			System.out.println("[ 1 ] Pesquisadores\n[ 2 ] Funcionarios de Limpeza\n[ 3 ] Secretário\n[ 4 ] Voltar");
+			System.out.print("Escolha uma opção: ");
+			opcao = read.nextInt();
 
 			switch (opcao) {
 			case 1:
@@ -55,7 +61,7 @@ public class MenusIniciais {
 				menuInicial();
 				break;
 			default:
-				TextosUtil.textoDefault();
+				System.out.println("Opção inválida!");
 				break;
 			}
 

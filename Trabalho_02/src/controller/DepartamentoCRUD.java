@@ -11,7 +11,6 @@ import javax.persistence.PersistenceException;
 import dao.DepartamentoDAO;
 import dao.DepartamentoJPA_DAO;
 import model.Departamento;
-import util.TextosUtil;
 import util.VerificacoesUtil;
 
 public class DepartamentoCRUD {
@@ -19,11 +18,8 @@ public class DepartamentoCRUD {
 
 	public static void criarDepartamento() {
 
-		TextosUtil.demarcacao();
-		System.out.println("\t   CADASTRO DE DEPARTAMENTO");
-		TextosUtil.demarcacao();
-		System.out.println("\n\tInforme os dados para Departamento\n");
-		System.out.print("Nome: ");
+		System.out.println("Informe os dados para Departamento");
+		System.out.println("Nome do Departamento: ");
 		String nome = read.nextLine();
 
 		if (VerificacoesUtil.verificaExistenciaDepartamento(nome) == true) {
@@ -47,10 +43,10 @@ public class DepartamentoCRUD {
 			}
 
 		} else {
-			TextosUtil.demarcacao();
-			TextosUtil.nomeJaCadastrado();
+			System.out.println(
+					"\nJá existe um Departamento com esse nome cadastrado no sistema.\nPor favor, escolha outro nome.");
 		}
-		TextosUtil.demarcacao();
+
 	}
 
 	public static void findAll() {
@@ -59,11 +55,11 @@ public class DepartamentoCRUD {
 		List<Departamento> departamentos = departamentoDAO.findAll();
 		departamentoDAO.close();
 
-		TextosUtil.demarcacao();
+		System.out.println("\n");
 		for (Departamento departamento : departamentos) {
 			System.out.println(departamento);
 		}
-		TextosUtil.demarcacao();
+		System.out.println("\n");
 	}
 
 	public static Departamento findByNome() {
@@ -72,8 +68,7 @@ public class DepartamentoCRUD {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
 		EntityManager em = emf.createEntityManager();
 
-		TextosUtil.demarcacao();
-		System.out.print("\nNome do Departamento: ");
+		System.out.println("Informe o nome do Departamento: ");
 		String nome = read.nextLine();
 
 		try {
@@ -82,15 +77,13 @@ public class DepartamentoCRUD {
 
 		} catch (Exception e) {
 			if (departamento == null) {
-				TextosUtil.demarcacao();
-				TextosUtil.nomeNaoEncontrado();
+				System.out.println("\nO nome informado não corresponde a nenhum Departamento cadastrado no sistema.\n");
 			}
 		}
-		TextosUtil.demarcacao();
+
 		return departamento;
 	}
 
-	// Função auxiliar
 	public static Departamento findByNome(String nome) {
 		Departamento departamento = null;
 
@@ -102,8 +95,31 @@ public class DepartamentoCRUD {
 					.setParameter("nome", nome + "%").getSingleResult();
 		} catch (Exception e) {
 			if (departamento == null) {
-				TextosUtil.demarcacao();
-				TextosUtil.nomeNaoEncontrado();
+				System.out.println("\nNome aceito.\n");
+			}
+		}
+
+		return departamento;
+	}
+
+	public static Departamento findById() {
+		Departamento departamento = null;
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
+		EntityManager em = emf.createEntityManager();
+
+		System.out.println("Informe o numero de identificação: ");
+		int id = read.nextInt();
+
+		try {
+			departamento = (Departamento) em
+					.createQuery("SELECT dp FROM Departamento d WHERE d.departamento_id LIKE :id")
+					.setParameter("id", id).getSingleResult();
+			em.close();
+
+		} catch (Exception e) {
+			if (departamento == null) {
+				System.out.println("\nO id informado não corresponde a nenhum Departamento cadastrado no sistema.\n");
 			}
 		}
 
@@ -113,36 +129,22 @@ public class DepartamentoCRUD {
 	public static void deleteByNome() {
 		DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();
 
-		TextosUtil.demarcacao();
-		System.out.print("Informe o nome do Departamento a ser deletado: ");
-		String nome = read.nextLine();
+		try {
+			departamentoDAO.beginTransaction();
 
-		if (VerificacoesUtil.verificaExistenciaDepartamento(nome) == false) {
-			try {
-				departamentoDAO.beginTransaction();
+			departamentoDAO.delete(findByNome());
 
-				System.out.print("Confirme o nome do Departamento: ");
-				departamentoDAO.delete(findByNome());
-
-				departamentoDAO.close();
-
-				TextosUtil.demarcacao();
-				TextosUtil.deletadoComSucesso();
-
-				departamentoDAO.commit();
-			} catch (IllegalStateException | PersistenceException e) {
-				System.out.println("Erro!");
-				departamentoDAO.rollback();
-				e.printStackTrace();
-			} finally {
-				departamentoDAO.close();
-			}
-		} else {
-			TextosUtil.demarcacao();
-			TextosUtil.nomeNaoEncontrado();
+			departamentoDAO.close();
+			System.out.println("Departamento deletado com sucesso!");
+			departamentoDAO.commit();
+		} catch (IllegalStateException | PersistenceException e) {
+			System.out.println("Erro!");
+			departamentoDAO.rollback();
+			e.printStackTrace();
+		} finally {
+			departamentoDAO.close();
 		}
-
-		TextosUtil.demarcacao();
+		System.out.println("\n");
 	}
 
 }

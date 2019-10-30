@@ -38,7 +38,7 @@ public class FuncionarioCRUD {
 		Departamento departamento = DepartamentoCRUD.findByNome();
 
 		/*System.out.println(
-				"Informe a funcao do seu Funcionário:\n[ 1 ] Funcionario de Limpeza\n[ 2 ] Secretario(a)\n[ 3 ] Pesquisador(a)");
+				"Informe a funcao do seu FuncionÃ¡rio:\n[ 1 ] Funcionario de Limpeza\n[ 2 ] Secretario(a)\n[ 3 ] Pesquisador(a)");
 		int opcao = read.nextInt();
 		read.nextLine();*/
 
@@ -47,10 +47,16 @@ public class FuncionarioCRUD {
 			String cargo = read.nextLine();
 			System.out.println("Jornada de trabalho: ");
 			String jornadaTrab = read.nextLine();
-
-			FuncionarioLimpeza funcionarioLimpeza = new FuncionarioLimpeza(nome, endereco, sexo, dataAniver, salario,
-					null, departamento, cargo, jornadaTrab);
-
+			
+			System.out.println("Funcionario possui gerente? 1 - sim, 0 - não");
+			int op = read.nextInt();
+			FuncionarioLimpeza funcionarioLimpeza;
+			if(op == 1)
+				funcionarioLimpeza = new FuncionarioLimpeza(nome, endereco, sexo, dataAniver, salario,
+					null, departamento, cargo, jornadaTrab, FuncLimpezaCRUD.findByNome());
+			else
+				funcionarioLimpeza = new FuncionarioLimpeza(nome, endereco, sexo, dataAniver, salario,
+						null, departamento, cargo, jornadaTrab, null);
 			return funcionarioLimpeza;
 
 		} else if (opcao == 2) {
@@ -62,17 +68,17 @@ public class FuncionarioCRUD {
 
 			return secretario;
 		} else if (opcao == 3) {
-			System.out.println("Área atuação: ");
+			System.out.println("Ã�rea atuaÃ§Ã£o: ");
 			String areaAtuacao = read.nextLine();
 
-			System.out.println("Informações do projeto em que irá trabalhara:");
+			System.out.println("InformaÃ§Ãµes do projeto em que irÃ¡ trabalhara:");
 			Projeto projeto = ProjetoCRUD.findByNome();
 
 			Funcionario pesquisador = new Pesquisador(nome, endereco, sexo, dataAniver, salario, null, departamento,
 					areaAtuacao, projeto);
 			return pesquisador;
 		} else {
-			System.out.println("Opção inválida");
+			System.out.println("OpÃ§Ã£o invÃ¡lida");
 
 			return null;
 		}

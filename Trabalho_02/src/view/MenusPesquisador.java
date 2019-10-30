@@ -1,18 +1,21 @@
 package view;
 
+import java.util.Scanner;
+
 import controller.FuncionarioCRUD;
 import controller.PesquisadorCRUD;
-import util.TextosUtil;
 
 public class MenusPesquisador {
-
+	static Scanner read = new Scanner(System.in);
 	static int opcao;
 
 	public static void menuInicialByPesquisador() {
 		do {
-			System.out.println("\n\t--- Pesquisadores---");
-
-			opcao = TextosUtil.menuCRUDs();
+			System.out.println("Menu Pesquisador:");
+			System.out.println(
+					"[ 1 ] Cadastra Pesquisador\n[ 2 ] Buscar Pesquisador \n[ 3 ] Deletar Pesquisador \n[ 4 ] Voltar ");
+			System.out.print("Escolha uma opção: ");
+			opcao = read.nextInt();
 
 			switch (opcao) {
 			case 1:
@@ -29,7 +32,7 @@ public class MenusPesquisador {
 				MenusIniciais.menuFuncionarios();
 				break;
 			default:
-				TextosUtil.textoDefault();
+				System.out.println("Opção inválida!");
 				break;
 			}
 
@@ -38,9 +41,10 @@ public class MenusPesquisador {
 
 	public static void menuBuscarByPesquisador() {
 		do {
-			System.out.println("\n\t--- Buscar Pesquisadores ---");
-
-			opcao = TextosUtil.menuBuscar();
+			System.out.println("Menu Pesquisar Pesquisador:");
+			System.out.println("[ 1 ] Listar todos os Pesquisador\n[ 2 ] Buscar Pesquisador por nome\n[ 3 ] Voltar ");
+			System.out.print("Escolha uma opção: ");
+			opcao = read.nextInt();
 
 			switch (opcao) {
 			case 1:
@@ -53,7 +57,7 @@ public class MenusPesquisador {
 				menuInicialByPesquisador();
 				break;
 			default:
-				TextosUtil.textoDefault();
+				System.out.println("Opção inválida!");
 				break;
 			}
 

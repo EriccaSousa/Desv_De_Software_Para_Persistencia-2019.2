@@ -12,8 +12,6 @@ import dao.DependenteDAO;
 import dao.DependenteJPA_DAO;
 import model.Dependente;
 import model.Funcionario;
-import util.TextosUtil;
-import util.VerificacoesUtil;
 
 public class DependenteCRUD {
 
@@ -26,27 +24,18 @@ public class DependenteCRUD {
 		try {
 			dependenteDAO.beginTransaction();
 
-			TextosUtil.demarcacao();
-			System.out.println("\t   CADASTRO DE DEPENDENTES");
-			TextosUtil.demarcacao();
-
 			System.out.println("Informe os dados para Dependente: ");
+			System.out.println("Nome: ");
+			String nome = read.nextLine();
+			System.out.println("Data Aniversário: ");
+			String dataAniver = read.nextLine();
+			System.out.println("Grau de parentesco: ");
+			String parentesco = read.nextLine();
 
 			Funcionario funcionario = FuncionarioDependente();
 
-			if (funcionario == null) {
-				System.out.println("\no Funcionário informado não existe no sistema.\n");
-			} else {
-				System.out.print("Nome: ");
-				String nome = read.nextLine();
-				System.out.print("Data Aniversário: ");
-				String dataAniver = read.nextLine();
-				System.out.print("Grau de parentesco: ");
-				String parentesco = read.nextLine();
-
-				dependenteDAO.save(new Dependente(nome, dataAniver, parentesco, funcionario));
-				dependenteDAO.commit();
-			}
+			dependenteDAO.save(new Dependente(nome, dataAniver, parentesco, funcionario));
+			dependenteDAO.commit();
 		} catch (IllegalStateException | PersistenceException e) {
 			System.out.println("\nErro ao salvar Dependente!\n");
 
@@ -55,17 +44,15 @@ public class DependenteCRUD {
 		} finally {
 			dependenteDAO.close();
 		}
-		TextosUtil.demarcacao();
+
 	}
 
 	public static Funcionario FuncionarioDependente() {
 		Funcionario funcionario = null;
 
 		System.out.println(
-				"\nFunção do funcionário agregado:\n[ 1 ] Funcionário de Limpeza\n[ 2 ] Secretário(a)\n[ 3 ] Pesquisador(a)");
-		System.out.print("Opcao: ");
+				"Informe a função do seu agregado:\n[ 1 ] Funcionário de Limpeza\n[ 2 ] Secretário(a)\n[ 3 ] Pesquisador(a)");
 		int opcao = read.nextInt();
-		read.nextLine();
 
 		if (opcao == 1) {
 			funcionario = FuncLimpezaCRUD.findByNome();
@@ -74,28 +61,31 @@ public class DependenteCRUD {
 		} else if (opcao == 3) {
 			funcionario = PesquisadorCRUD.findByNome();
 		} else {
-			TextosUtil.textoDefault();
-			TextosUtil.demarcacao();
-			TextosUtil.demarcacao();
+			System.out.println("Opção inválida!");
 		}
 
 		return funcionario;
 	}
 
 	public static void findAll() {
+		try {
+			DependenteDAO dependenteDAO = new DependenteJPA_DAO();
 
-		DependenteDAO dependenteDAO = new DependenteJPA_DAO();
+			List<Dependente> dependentes = dependenteDAO.findAll();
+			dependenteDAO.close();
 
-		List<Dependente> dependentes = dependenteDAO.findAll();
-
-		dependenteDAO.close();
-
-		TextosUtil.demarcacao();
-		for (Dependente dependente : dependentes) {
-			System.out.println("Dependente");
-			System.out.println(dependente);
+			if (dependentes == null) {
+				System.out.println("N�o existe nenhum dependente foi cadastrado no banco");
+				return;
+			}
+			System.out.println("\n");
+			for (Dependente dependente : dependentes) {
+				System.out.println(dependente);
+			}
+			System.out.println("\n");
+		} catch (Exception e) {
+			System.out.println("\nNão há Dependentes cadastrados.\n");
 		}
-		TextosUtil.demarcacao();
 	}
 
 	public static Dependente findByNome() {
@@ -104,8 +94,7 @@ public class DependenteCRUD {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
 		EntityManager em = emf.createEntityManager();
 
-		TextosUtil.demarcacao();
-		System.out.println("Nome do Dependente: ");
+		System.out.println("Informe o nome: ");
 		String nome = read.nextLine();
 
 		try {
@@ -113,30 +102,31 @@ public class DependenteCRUD {
 					.setParameter("nome", nome + "%").getSingleResult();
 		} catch (Exception e) {
 			if (dependente == null) {
-				TextosUtil.demarcacao();
-				TextosUtil.nomeNaoEncontrado();
+				System.out.println("\nO nome informado não corresponde a nenhum Dependente cadastrado no sistema.\n");
 			}
 		}
-		TextosUtil.demarcacao();
+
 		return dependente;
 	}
 
-	// Função auxiliar
-	public static Dependente findByNome(String nome) {
+	public static Dependente findById() {
 		Dependente dependente = null;
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
 		EntityManager em = emf.createEntityManager();
 
+		System.out.println("Informe o numero de identificação: ");
+		String id = read.nextLine();
+
 		try {
-			dependente = (Dependente) em.createQuery("SELECT d FROM Dependente d WHERE d.nome LIKE :nome")
-					.setParameter("nome", nome + "%").getSingleResult();
+			dependente = (Dependente) em.createQuery("SELECT d FROM Dependente d WHERE d.dependente_id LIKE :id")
+					.setParameter("id", id + "%").getSingleResult();
+			em.close();
 		} catch (Exception e) {
-			if (dependente == null) {
-				TextosUtil.demarcacao();
-				TextosUtil.nomeNaoEncontrado();
-			}
+			System.out.println("\nO nome informado não corresponde a nenhum Dependente cadastrado no sistema.\n");
+
 		}
+
 		return dependente;
 	}
 
@@ -144,43 +134,38 @@ public class DependenteCRUD {
 		DependenteDAO dependenteDAO = new DependenteJPA_DAO();
 		DependenteDAO dependenteDAO2 = new DependenteJPA_DAO();
 
-		TextosUtil.demarcacao();
-		System.out.print("Informe o nome do Dependente a ser deletado: ");
-		String nome = read.nextLine();
+		try {
+			dependenteDAO.beginTransaction();
 
-		if (VerificacoesUtil.verificaExistenciaDependente(nome) == false) {
-			try {
-				dependenteDAO.beginTransaction();
+			Dependente dependente = findByNome();
 
-				System.out.print("Confirme o nome do Dependente: ");
-				Dependente dependente = findByNome();
+			dependente.setFuncionario(null);
 
-				dependente.setFuncionario(null);
+			dependenteDAO.delete(dependente);
 
-				dependenteDAO.delete(dependente);
-				dependenteDAO.close();
-				dependenteDAO.commit();
+			dependenteDAO.close();
 
-				dependenteDAO.beginTransaction();
-				dependenteDAO.delete(dependente);
-				dependenteDAO.close();
+			dependenteDAO2.beginTransaction();
 
-				dependenteDAO.commit();
+			System.out.println("Confirme o nome do Dependente a ser removido.");
+			Dependente dependente2 = findByNome();
 
-				TextosUtil.deletadoComSucesso();
-			} catch (IllegalStateException | PersistenceException e) {
-				System.out.println("Erro!");
-				dependenteDAO.rollback();
-				e.printStackTrace();
-			} finally {
-				dependenteDAO.close();
-			}
-		} else {
-			TextosUtil.demarcacao();
-			TextosUtil.nomeNaoEncontrado();
+			dependente2.setFuncionario(null);
+
+			dependenteDAO2.delete(dependente);
+
+			dependenteDAO2.close();
+			System.out.println("Projeto deletado com sucesso!");
+			dependenteDAO.commit();
+		} catch (IllegalStateException | PersistenceException e) {
+			System.out.println("Erro!");
+			dependenteDAO.rollback();
+			e.printStackTrace();
+		} finally {
+			dependenteDAO.close();
 		}
 
-		TextosUtil.demarcacao();
+		System.out.println("\n");
 	}
 
 }
