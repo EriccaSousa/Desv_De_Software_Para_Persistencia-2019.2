@@ -21,13 +21,13 @@ public class MenuSecretario {
 			switch (opcao) {
 			case 1:
 				System.out.println("Aqui!");
-				FuncionarioCRUD.criarSecretario();
+				FuncionarioCRUD.criarSecretario(2);
 				break;
 			case 2:
 				menuBuscarBySecretario();
 				break;
 			case 3:
-				menuDeletarBySecretario();
+				SecretarioCRUD.deleteByNome();
 				break;
 			case 4:
 				MenusIniciais.menuFuncionarios();
@@ -43,8 +43,7 @@ public class MenuSecretario {
 	public static void menuBuscarBySecretario() {
 		do {
 			System.out.println("Menu Pesquisar Secretário:");
-			System.out.println(
-					"[ 1 ] Listar todos os Secretários\n[ 2 ] Buscar Secretários por nome\n[ 3 ] Buscar Secretários por número de identificação\n[ 4 ] Voltar ");
+			System.out.println("[ 1 ] Listar todos os Secretários\n[ 2 ] Buscar Secretários por nome\n[ 3 ] Voltar ");
 			System.out.print("Escolha uma opção: ");
 			opcao = read.nextInt();
 
@@ -56,9 +55,6 @@ public class MenuSecretario {
 				System.out.println("\n" + SecretarioCRUD.findByNome() + "\n");
 				break;
 			case 3:
-				// System.out.println(SecretarioCRUD.findById());
-				break;
-			case 4:
 				menuInicialBySecretario();
 				break;
 			default:
@@ -69,29 +65,4 @@ public class MenuSecretario {
 		} while (true);
 	}
 
-	public static void menuDeletarBySecretario() {
-		do {
-			System.out.println("Menu Deletar Secretário:");
-			System.out.println(
-					"[ 1 ] Deletar Secretários por nome\n[ 2 ] Deletar Secretários por número de identificação\n[ 3 ] Voltar ");
-			System.out.print("Escolha uma opção: ");
-			opcao = read.nextInt();
-
-			switch (opcao) {
-			case 1:
-				// SecretarioCRUD.deleteByNome();
-				break;
-			case 2:
-				// SecretarioCRUD.deleteById();
-				break;
-			case 3:
-				menuInicialBySecretario();
-				break;
-			default:
-				System.out.println("Opção inválida!");
-				break;
-			}
-
-		} while (true);
-	}
 }

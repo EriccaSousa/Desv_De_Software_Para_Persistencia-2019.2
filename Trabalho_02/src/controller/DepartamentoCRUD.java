@@ -147,25 +147,4 @@ public class DepartamentoCRUD {
 		System.out.println("\n");
 	}
 
-	public static void deleteById() {
-		DepartamentoDAO departamentoDAO = new DepartamentoJPA_DAO();
-
-		try {
-			departamentoDAO.beginTransaction();
-
-			departamentoDAO.delete(findById());
-
-			departamentoDAO.close();
-			System.out.println("Departamento deletado com sucesso!");
-			departamentoDAO.commit();
-		} catch (IllegalStateException | PersistenceException e) {
-			System.out.println("Erro!");
-			departamentoDAO.rollback();
-			e.printStackTrace();
-		} finally {
-			departamentoDAO.close();
-		}
-		System.out.println("\n");
-	}
-
 }

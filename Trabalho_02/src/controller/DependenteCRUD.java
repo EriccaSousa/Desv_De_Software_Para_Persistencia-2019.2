@@ -74,8 +74,8 @@ public class DependenteCRUD {
 			List<Dependente> dependentes = dependenteDAO.findAll();
 			dependenteDAO.close();
 
-			if(dependentes == null) {
-				System.out.println("Não existe nenhum dependente foi cadastrado no banco");
+			if (dependentes == null) {
+				System.out.println("Nï¿½o existe nenhum dependente foi cadastrado no banco");
 				return;
 			}
 			System.out.println("\n");

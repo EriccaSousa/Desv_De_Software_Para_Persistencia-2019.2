@@ -24,7 +24,7 @@ public class MenusDependente {
 				menuBuscarByDependente();
 				break;
 			case 3:
-				menuDeletarByDependente();
+				DependenteCRUD.deleteByNome();
 				break;
 			case 4:
 				MenusIniciais.menuInicial();
@@ -40,8 +40,7 @@ public class MenusDependente {
 	public static void menuBuscarByDependente() {
 		do {
 			System.out.println("Menu Pesquisar Dependentes:");
-			System.out.println(
-					"[ 1 ] Listar todos os Dependentes\n[ 2 ] Buscar Dependentes por nome\n[ 3 ] Buscar Dependentes por número de identificação\n[ 4 ] Voltar ");
+			System.out.println("[ 1 ] Listar todos os Dependentes\n[ 2 ] Buscar Dependentes por nome\n[ 3 ] Voltar ");
 			System.out.print("Escolha uma opção: ");
 			opcao = read.nextInt();
 
@@ -51,35 +50,6 @@ public class MenusDependente {
 				break;
 			case 2:
 				System.out.println("\n" + DependenteCRUD.findByNome() + "\n");
-				break;
-			case 3:
-				// System.out.println("\n" + DependenteCRUD.findById() + "\n");
-				break;
-			case 4:
-				menuInicialByDependente();
-				break;
-			default:
-				System.out.println("Opção inválida!");
-				break;
-			}
-
-		} while (true);
-	}
-
-	public static void menuDeletarByDependente() {
-		do {
-			System.out.println("Menu Deletar Dependentes:");
-			System.out.println(
-					"[ 1 ] Deletar Dependentes por nome\n[ 2 ] Deletar Dependentes por número de identificação\n[ 3 ] Voltar ");
-			System.out.print("Escolha uma opção: ");
-			opcao = read.nextInt();
-
-			switch (opcao) {
-			case 1:
-				DependenteCRUD.deleteByNome();
-				break;
-			case 2:
-				// DependenteCRUD.deleteById();
 				break;
 			case 3:
 				menuInicialByDependente();

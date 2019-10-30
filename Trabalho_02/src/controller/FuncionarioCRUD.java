@@ -20,7 +20,7 @@ import model.Secretario;
 public class FuncionarioCRUD {
 	static Scanner read = new Scanner(System.in);
 
-	public static Funcionario retornarFuncionario() {
+	public static Funcionario retornarFuncionario(int opcao) {
 
 		System.out.println("Informe os dados do Funcionario(a)\n");
 		System.out.println("Nome: ");
@@ -37,10 +37,10 @@ public class FuncionarioCRUD {
 
 		Departamento departamento = DepartamentoCRUD.findByNome();
 
-		System.out.println(
+		/*System.out.println(
 				"Informe a funcao do seu Funcionário:\n[ 1 ] Funcionario de Limpeza\n[ 2 ] Secretario(a)\n[ 3 ] Pesquisador(a)");
 		int opcao = read.nextInt();
-		read.nextLine();
+		read.nextLine();*/
 
 		if (opcao == 1) {
 			System.out.println("Cargo:");
@@ -79,11 +79,11 @@ public class FuncionarioCRUD {
 
 	}
 
-	public static void criarSecretario() {
+	public static void criarSecretario(int opcao) {
 		SecretarioDAO secretarioDAO = new SecretarioJPA_DAO();
 		try {
 			secretarioDAO.beginTransaction();
-			secretarioDAO.save(retornarFuncionario());
+			secretarioDAO.save(retornarFuncionario(opcao));
 			secretarioDAO.commit();
 		} catch (IllegalStateException | PersistenceException e) {
 			System.out.println("\nErro ao salvar Pesquisador!\n");
@@ -95,12 +95,12 @@ public class FuncionarioCRUD {
 		}
 	}
 
-	public static void criarPesquisador() {
+	public static void criarPesquisador(int opcao) {
 		PesquisadorDAO pesquisadorDAO = new PesquisadorJPA_DAO();
 
 		try {
 			pesquisadorDAO.beginTransaction();
-			pesquisadorDAO.save(retornarFuncionario());
+			pesquisadorDAO.save(retornarFuncionario(opcao));
 			pesquisadorDAO.commit();
 		} catch (IllegalStateException | PersistenceException e) {
 			System.out.println("\nErro ao salvar Pesquisador!\n");
@@ -112,12 +112,12 @@ public class FuncionarioCRUD {
 		}
 	}
 
-	public static void criarFuncLmpeza() {
+	public static void criarFuncLmpeza(int opcao) {
 		FuncionarioLimpezaDAO funcLimpezaDAO = new FuncionarioLimpezaJPA_DAO();
 
 		try {
 			funcLimpezaDAO.beginTransaction();
-			funcLimpezaDAO.save(retornarFuncionario());
+			funcLimpezaDAO.save(retornarFuncionario(opcao));
 			funcLimpezaDAO.commit();
 		} catch (IllegalStateException | PersistenceException e) {
 			System.out.println("\nErro ao salvar Funcionario de Limpeza!\n");

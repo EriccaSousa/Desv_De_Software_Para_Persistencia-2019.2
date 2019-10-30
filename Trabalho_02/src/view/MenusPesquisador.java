@@ -20,13 +20,13 @@ public class MenusPesquisador {
 			switch (opcao) {
 			case 1:
 				System.out.println("Aqui!");
-				FuncionarioCRUD.criarPesquisador();
+				FuncionarioCRUD.criarPesquisador(3);
 				break;
 			case 2:
 				menuBuscarByPesquisador();
 				break;
 			case 3:
-				menuDeletarByPesquisador();
+				PesquisadorCRUD.deleteByNome();
 				break;
 			case 4:
 				MenusIniciais.menuFuncionarios();
@@ -42,8 +42,7 @@ public class MenusPesquisador {
 	public static void menuBuscarByPesquisador() {
 		do {
 			System.out.println("Menu Pesquisar Pesquisador:");
-			System.out.println(
-					"[ 1 ] Listar todos os Pesquisador\n[ 2 ] Buscar Pesquisador por nome\n[ 3 ] Buscar Pesquisadorpor número de identificação\n[ 4 ] Voltar ");
+			System.out.println("[ 1 ] Listar todos os Pesquisador\n[ 2 ] Buscar Pesquisador por nome\n[ 3 ] Voltar ");
 			System.out.print("Escolha uma opção: ");
 			opcao = read.nextInt();
 
@@ -53,35 +52,6 @@ public class MenusPesquisador {
 				break;
 			case 2:
 				System.out.println("\n" + PesquisadorCRUD.findByNome() + "\n");
-				break;
-			case 3:
-
-				break;
-			case 4:
-				menuInicialByPesquisador();
-				break;
-			default:
-				System.out.println("Opção inválida!");
-				break;
-			}
-
-		} while (true);
-	}
-
-	public static void menuDeletarByPesquisador() {
-		do {
-			System.out.println("Menu Deletar Pesquisador:");
-			System.out.println(
-					"[ 1 ] Deletar Pesquisador por nome\n[ 2 ] Deletar Pesquisador por número de identificação\n[ 3 ] Voltar ");
-			System.out.print("Escolha uma opção: ");
-			opcao = read.nextInt();
-
-			switch (opcao) {
-			case 1:
-
-				break;
-			case 2:
-
 				break;
 			case 3:
 				menuInicialByPesquisador();
