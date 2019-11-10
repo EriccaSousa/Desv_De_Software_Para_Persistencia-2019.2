@@ -1,0 +1,3 @@
+<!DOCTYPE Olimpíadas SYSTEM "xml_geradoMatch.dtd" >
+
+<Olimpíadas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="xml_geradoMatch.xsd">

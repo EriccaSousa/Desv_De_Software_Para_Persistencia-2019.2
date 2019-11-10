@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="Olimpíadas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Games" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Atletas">
+                <xs:complexType>
+                  <xs:sequence>
+                      <xs:element name="Name" type="xs:string"></xs:element>
+                      <xs:element name="Sex" type="xs:string"></xs:element>
+                      <xs:element name="Age" type="xs:string"></xs:element>
+                      <xs:element name="Height" type="xs:string"></xs:element>
+                      <xs:element name="Weight" type="xs:string"></xs:element>
+                      <xs:element name="Team" type="xs:string"></xs:element>
+                      <xs:element name="Games" type="xs:string"></xs:element>
+                      <xs:element name="City" type="xs:string"></xs:element>
+                      <xs:element name="Sport" type="xs:string"></xs:element>
+                      <xs:element name="Event" type="xs:string"></xs:element>
+                      <xs:element name="Medal" type="xs:string"></xs:element>
+                  </xs:sequence>
+
+                  <xs:attribute name="id" type="xs:int"></xs:attribute>
+
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+
+            <xs:attribute name="jogos" type="xs:string"></xs:attribute>
+
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

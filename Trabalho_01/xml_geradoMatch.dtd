@@ -1,0 +1,16 @@
+<!ELEMENT Olimpíadas (Season*)>
+<!ELEMENT Season (Atletas*)>
+<!ELEMENT Atletas (Name,Sex,Age,Height,Weight,Team,City,Sport,Event,Medal)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT Sex (#PCDATA)>
+<!ELEMENT Age (#PCDATA)>
+<!ELEMENT Height (#PCDATA)>
+<!ELEMENT Weight (#PCDATA)>
+<!ELEMENT Team (#PCDATA)>
+<!ELEMENT City (#PCDATA)>
+<!ELEMENT Sport (#PCDATA)>
+<!ELEMENT Event (#PCDATA)>
+<!ELEMENT Medal (#PCDATA)>
+<!ATTLIST Atletas id CDATA #REQUIRED>
+<!ATTLIST Season Games CDATA #REQUIRED>
+
