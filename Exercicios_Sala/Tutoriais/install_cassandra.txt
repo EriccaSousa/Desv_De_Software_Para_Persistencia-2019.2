@@ -1,0 +1,19 @@
+echo "deb http://www.apache.org/dist/cassandra/debian 36x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
+sudo apt-get update
+
+se der o erro:
+	GPG error: http://www.apache.org 36x InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY A278B781FE4B2BDA
+	use o comando:
+		sudo apt-key adv --keyserver pool.sks-keyservers.net --recv-key A278B781FE4B2BDA
+		
+sudo apt-get install cassandra
+
+
+cqlsh para executar. se não funcionar, tente:
+	sudo apt install python-pip
+	pip install cassandra-driver
+	export CQLSH_NO_BUNDLED=true
+
+	se mesmo assim não funcionar, usar o cassandra DevCenter
+

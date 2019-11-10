@@ -1,0 +1,12 @@
+{
+	"nome":"Anderson",
+	"idade":25,
+	"universidade":{
+		"nome":"Universidade Federal do Ceará",
+		"sigla":"UFC",
+		"notas":[4,5,2,5,6]
+	}
+}
+
+
+

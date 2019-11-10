@@ -1,0 +1,22 @@
+INSTALAR
+	Linux:
+		xmllint (para validar xml com dtd):
+			sudo apt-get install libxml2-utils
+		BaseX:
+			sudo apt-get install basex
+	Windows:
+		BaseX:
+			http://basex.org/download/
+
+VALIDAÇÃO E XPATH (validação com DTD e XSD)
+	Linux:
+		xmllint --noout --dtdvalid arquivo.dtd arquivo.xml 
+		xmllint --noout --schema arquivo.xsd arquivo.xml
+		xmllint --xpath 'expressao' arquivo.xml
+	Windows:
+		Não encontrei uma boa ferramenta para Windows, mas a aplicação online abaixo é uma boa opção:
+			http://xmlvalidator.new-studio.org/
+
+
+XSLT - Consertar erro do Firefox:
+	http://testingfreak.com/how-to-fix-cross-origin-request-security-cors-error-in-firefox-chrome-and-ie/

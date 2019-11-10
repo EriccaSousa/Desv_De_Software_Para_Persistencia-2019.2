@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<livros atributo1="valor 1" atributo2="valor 2">
+	<livro ano="1954">
+		<título>O senhor dos anéis</título>
+		<isbn>123</isbn>
+		<editora>Editora Fantasia</editora>
+		<edição>1</edição>
+		<autores>
+			<autor>
+				<nome>Tolkien</nome>
+				<endereço>Quixadá</endereço>
+			</autor>
+		</autores>
+	</livro>
+	<livro ano="1974">
+		<título>Teoria dos grafos</título>
+		<isbn>456</isbn>
+		<editora>Editora Inventada</editora>
+		<edição>5</edição>
+		<autores>
+			<autor>
+				<nome>Bondy</nome>
+				<endereço>Juazeiro</endereço>
+			</autor>
+			<autor>
+				<nome>Murty</nome>
+				<endereço>Sobral</endereço>
+			</autor>
+		</autores>
+	</livro>
+	<livro ano="1990">
+		<título>Game of Thrones</título>
+		<isbn>789</isbn>
+		<editora>Editora Fictícia</editora>
+		<edição>3</edição>
+		<autores>
+			<autor>
+				<nome>Martin</nome>
+				<endereço>Acopiara</endereço>
+			</autor>
+		</autores>
+	</livro>
+</livros>
